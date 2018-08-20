@@ -17,7 +17,9 @@ const options = {
   },
   routes: {
     include: [
-      '/shops'  // 店铺列表支持分页特性
+      '/shops',
+      '/shops/{shopId}/goods'
+      // 店铺列表支持分页特性
     ],
     exclude: []
   }
