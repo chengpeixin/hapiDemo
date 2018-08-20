@@ -1,0 +1,5 @@
+/node_modules
+
+yarn.lock
+# 服务器配置文件
+.env
