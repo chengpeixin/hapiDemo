@@ -6,6 +6,10 @@ const pluginHapiSwagger = require('./plugins/hapi-swagger');
 const pluginHapiPagination = require('./plugins/hapi-pagination')
 const routesShops = require('./routes/shops');
 const routesOrders = require('./routes/orders');
+const routeUsers = require('./routes/user')
+const hapiAuthJWT2 = require('hapi-auth-jwt2');
+const pluginHapiAuthJWT2 = require('./plugins/hapi-auth-jwt2');
+
 const server = new Hapi.Server();
 // 命令行增加颜色
 const colors = require('colors')
@@ -28,14 +32,17 @@ server.connection({
 });
 const init = async () => {
   await server.register([
+    hapiAuthJWT2,
     ...pluginHapiSwagger,
     pluginHapiPagination
   ])
+  pluginHapiAuthJWT2(server)
   server.route([
     // 创建一个简单的hello hapi接口
     ...routesHelloHapi,
     ...routesShops,
-    ...routesOrders
+    ...routesOrders,
+    ...routeUsers
   ]);
   // 启动服务
   await server.start();

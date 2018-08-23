@@ -23,6 +23,7 @@ module.exports = [
     config: {
       tags: ['api', GROUP_NAME],
       description: '获取店铺列表',
+      auth: false,
       validate: {
         query: {
           ...paginationDefine,
@@ -52,6 +53,7 @@ module.exports = [
     config: {
       tags: ['api', GROUP_NAME],
       description: '获取店铺的商品列表',
+      auth: false,
       validate: {
         params: {
           shopId: Joi.string().required().description('店铺的id'),

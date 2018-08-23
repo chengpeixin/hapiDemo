@@ -1,5 +1,5 @@
 const Joi = require('joi');
-
+// 分页插件
 const paginationDefine = {
   limit: Joi.number().integer().min(1).default(10)
     .description('每页的条目数'),
@@ -8,4 +8,10 @@ const paginationDefine = {
   pagination: Joi.boolean().default(true).description('是否开启分页，默认为true'),
 };
 
-module.exports = { paginationDefine };
+// 
+const jwtHeaderDefine = {
+  headers:Joi.object({
+    authorization:Joi.string().required()
+  }).unknown()
+}
+module.exports = { paginationDefine ,jwtHeaderDefine};
