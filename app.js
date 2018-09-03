@@ -9,6 +9,7 @@ const routesOrders = require('./routes/orders');
 const routeUsers = require('./routes/user')
 const hapiAuthJWT2 = require('hapi-auth-jwt2');
 const pluginHapiAuthJWT2 = require('./plugins/hapi-auth-jwt2');
+const routeWxLogin = require('./routes/users')
 
 const server = new Hapi.Server();
 // 命令行增加颜色
@@ -42,7 +43,8 @@ const init = async () => {
     ...routesHelloHapi,
     ...routesShops,
     ...routesOrders,
-    ...routeUsers
+    ...routeUsers,
+    ...routeWxLogin
   ]);
   // 启动服务
   await server.start();
