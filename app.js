@@ -1,16 +1,11 @@
 const Hapi = require('hapi');
 require('env2')('./.env');
 const config = require('./config');
-const routesHelloHapi = require('./routes/hello-hapi');
 const pluginHapiSwagger = require('./plugins/hapi-swagger');
 const pluginHapiPagination = require('./plugins/hapi-pagination')
-const routesShops = require('./routes/shops');
-const routesOrders = require('./routes/orders');
-const routeUsers = require('./routes/user')
 const hapiAuthJWT2 = require('hapi-auth-jwt2');
 const pluginHapiAuthJWT2 = require('./plugins/hapi-auth-jwt2');
-const routeWxLogin = require('./routes/users')
-
+const routers = require('./routes')
 const server = new Hapi.Server();
 // 命令行增加颜色
 const colors = require('colors')
@@ -39,16 +34,12 @@ const init = async () => {
   ])
   pluginHapiAuthJWT2(server)
   server.route([
-    // 创建一个简单的hello hapi接口
-    ...routesHelloHapi,
-    ...routesShops,
-    ...routesOrders,
-    ...routeUsers,
-    ...routeWxLogin
+    ...routers
   ]);
   // 启动服务
   await server.start();
-  console.log(`服务启动成功:${config.HOST+':'+config.PORT} \n接口文档地址:${config.HOST+':'+config.PORT}/documentation`.info);
+  console.log(`port:${config.HOST+':'+config.PORT} \nAPIDocs:${config.HOST+':'+config.PORT}/documentation`.info);
 };
 
+console.log(...routers)
 init();

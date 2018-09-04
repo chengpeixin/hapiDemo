@@ -46,7 +46,6 @@ module.exports = [{
         const generateJWT = (jwtInfo) => {
             const payload = {
                 userId:jwtInfo.userId,
-                name:'很帅',
                 exp:Math.floor(new Date().getTime() / 1000 + 7 *24 *60 *60)
             }
             return JWT.sign(payload,config.jwtSecret)
